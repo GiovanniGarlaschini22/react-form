@@ -6,15 +6,18 @@ function App() {
   const [musicians, setMusicians] = useState(jazzMusicians);
 
   const handleAddMusician = () => {
-    if (firstMusician.trim() !== "") {
+    if (firstMusician.trim() === "") {
+      alert("scrivi correttamente il musicista che hai in mente!");
+    } else {
       const newMusician = {
-        id: musicians.length + 1,
+        id: musicians.length +1,
         musicista: firstMusician,
         strumenti: [],
         canzoni: []
       };
-      setMusicians([...musicians, newMusician]);
+      setMusicians([newMusician, ...musicians]);
       setFirstMusician("");
+      alert("Musicista aggiunto alla lista correttamente!")
     }
   };
 
