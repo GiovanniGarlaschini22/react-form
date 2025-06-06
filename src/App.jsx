@@ -1,24 +1,39 @@
-// IMPORT //
 import jazzMusicians from "./data/jazzMusicians";
-import {useState} from "react";
+import { useState } from "react";
 
 function App() {
-  const [firstMusician, setFirstMusician] = useState("Pat Metheny");
+  const [firstMusician, setFirstMusician] = useState("");
+  const [musicians, setMusicians] = useState(jazzMusicians);
+
+  const handleAddMusician = () => {
+    if (firstMusician.trim() !== "") {
+      const newMusician = {
+        id: musicians.length + 1,
+        musicista: firstMusician,
+        strumenti: [],
+        canzoni: []
+      };
+      setMusicians([...musicians, newMusician]);
+      setFirstMusician("");
+    }
+  };
+
   return (
     <>
       <div>
         <h1>Musicisti Jazz</h1>
         <ul>
-          {jazzMusicians.map((musicista) => (
+          {musicians.map((musicista) => (
             <li key={musicista.id}>
               {musicista.musicista}
             </li>
           ))}
         </ul>
       </div>
+      
       <div className="container">
         <h2>JazzMusician Form</h2>
-        <label className="form-label" htmlFor="musician">
+        <label className="form-label" htmlFor="musicista">
           Inserisci il nome del musicista che vuoi aggiungere
         </label>
         <input
@@ -29,10 +44,19 @@ function App() {
           className="form-control"
           id="musicista"
         />
-        <div className="mt-4">
-          <h6>tutti i musicisti</h6>
+        
+        <button 
+          onClick={handleAddMusician}
+          className="btn btn-primary mt-2"
+          type="button"
+        >
+          Aggiungi Musicista
+        </button>
+        
+        <div className="mt-3">
+          <h5>Musicisti disponibili:</h5>
           <ul className="list-group">
-            {jazzMusicians.map((musicista) => (
+            {musicians.map((musicista) => (
               <li key={musicista.id} className="list-group-item">
                 {musicista.musicista}
               </li>
