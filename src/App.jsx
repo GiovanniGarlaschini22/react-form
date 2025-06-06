@@ -24,10 +24,21 @@ function App() {
         <input
           value={firstMusician}
           type="text"
+          onChange={(event) => setFirstMusician(event.target.value)}
           autoComplete="off"
           className="form-control"
           id="musicista"
-          />
+        />
+        <div className="mt-4">
+          <h6>tutti i musicisti</h6>
+          <ul className="list-group">
+            {jazzMusicians.map((musicista) => (
+              <li key={musicista.id} className="list-group-item">
+                {musicista.musicista}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
